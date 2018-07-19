@@ -42,7 +42,7 @@ const config = {
 };
 
 
-PIXI.loader.add().load((loader, resources) => {
+PIXI.loader.add('logo', 'img/devgru-logo.png').load((loader, resources) => {
 
 
     const colorArray = [
@@ -98,7 +98,6 @@ PIXI.loader.add().load((loader, resources) => {
         diamond.lineTo(0, ss/3);
         diamond.lineTo(ss/2, 0);
 
-        
         //diamond.rotation = 0.785398;
         diamond.pivot.x = config.sqSize / 2;
         diamond.pivot.y = config.sqSize / 2;
@@ -113,6 +112,8 @@ PIXI.loader.add().load((loader, resources) => {
     }
 
 
+
+    
 
     function makeDiamonds(){
         let container = new PIXI.Sprite(); 
@@ -159,7 +160,15 @@ PIXI.loader.add().load((loader, resources) => {
     // bigPattern.anchor.set(0.5, 0.5);
     app.stage.addChild(bigPattern);
 
-    
+    const logo = new PIXI.Sprite(resources.logo.texture);
+    logo.x = app.renderer.width / 2;
+    logo.y = app.renderer.height / 2;
+    logo.anchor.x = 0.5;
+    logo.anchor.y = 0.5;
+    logo.scale.x = .2;
+    logo.scale.y = .2;
+    //app.stage.addChild(logo);
+
    
 
 

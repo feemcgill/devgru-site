@@ -5,14 +5,11 @@ function shuffle(array) {
         temporaryValue,
         randomIndex;
 
-    // While there remain elements to shuffle...
     while (0 !== currentIndex) {
 
-        // Pick a remaining element...
         randomIndex = Math.floor(Math.random() * currentIndex);
         currentIndex -= 1;
 
-        // And swap it with the current element.
         temporaryValue = array[currentIndex];
         array[currentIndex] = array[randomIndex];
         array[randomIndex] = temporaryValue;
@@ -21,9 +18,6 @@ function shuffle(array) {
     return array;
 }
 
-// The application will create a renderer using WebGL, if possible,
-// with a fallback to a canvas render. It will also setup the ticker
-// and the root stage PIXI.Container
 var app = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
@@ -31,8 +25,6 @@ var app = new PIXI.Application({
     forceCanvas: true
 });
 
-// The application will create a canvas element for you that you
-// can then insert into the DOM
 document.body.appendChild(app.view);
 
 var testShape = false;
@@ -51,41 +43,9 @@ var config = {
     }
 };
 
-// load the texture we need
-PIXI.loader.add('fun', 'img/fun.png').load(function (loader, resources) {
-    // This creates a texture from a 'fun.png' image
-
+PIXI.loader.add('logo', 'img/devgru-logo.png').load(function (loader, resources) {
 
     var colorArray = [config.colors.red, config.colors.green, config.colors.blue, config.colors.yellow, config.colors.green, config.colors.red, config.colors.yellow, config.colors.blue];
-
-    // const bigRect = new PIXI.Graphics();
-    // bigRect.beginFill(0xfaaFaF, 1);
-    // bigRect.drawRect(0, 0, window.innerWidth, window.innerHeight);
-    // bigRect.endFill();
-    // bigRect.aplha = .4;
-    // bigRect.interactive = true;
-    // //app.stage.addChild(bigRect);
-
-    // bigRect.on('mousemove', function (event) {
-    //     const e = event;
-    //     //_.throttle(function(){
-    //     // console.log('throttle');
-    //     //TweenMax.to(bigPattern, 1, { x: e.data.global.x, y: e.data.global.y });
-    //     //}, 100);
-    // });
-
-
-    // const vidTex = new PIXI.Texture.fromVideo('vid/duckisland.mp4');
-    // var videoSprite = new PIXI.Sprite(vidTex);
-    // console.log(vidTex);
-    // vidTex.baseTexture.source.loop = true;
-    // vidTex.baseTexture.source.muted = true;
-    // vidTex.baseTexture.source.playbackRate = 16;
-    // // Stetch the fullscreen
-    // videoSprite.width = app.screen.width;
-    // videoSprite.height = app.screen.height;
-
-    //app.stage.addChild(videoSprite);
 
     function makeDiamond(color) {
         var ss = config.sqSize;
@@ -97,8 +57,6 @@ PIXI.loader.add('fun', 'img/fun.png').load(function (loader, resources) {
         shapeBox.hitArea = new PIXI.Rectangle(0, 0, config.sqSize, config.sqSize);
 
         function onMouseover() {
-            // diamond.scale.x *= .32;
-            // diamond.scale.y *= .32;
             TweenMax.to(diamond.scale, .3, { x: 0.62, y: 0.62, onComplete: function onComplete() {
                     TweenMax.to(diamond.scale, .5, { x: 1, y: 1, delay: 1.3 });
                 } });
@@ -116,7 +74,6 @@ PIXI.loader.add('fun', 'img/fun.png').load(function (loader, resources) {
         shapeBox.addChild(diamond);
 
         diamond.lineStyle(2, color, 0.7, 0.005);
-        //diamond.drawRect(0, 0, config.sqSize, config.sqSize);
         diamond.alpha = 1;
 
         diamond.moveTo(ss / 2, 0);
@@ -141,14 +98,6 @@ PIXI.loader.add('fun', 'img/fun.png').load(function (loader, resources) {
 
     function makeDiamonds() {
         var container = new PIXI.Sprite();
-        // container.width = 5000;
-        // container.height = 200;
-        // const bg = new PIXI.Graphics();
-        // bg.beginFill(0x000000, 1);
-        // bg.drawRect(0, 0, 500, 442);
-        // bg.endFill();
-
-        // container.addChild(bg);
 
         // for (let a = 0; a <  app.renderer.height / (config.sqSize / 2); a++) {
         //     for (let i = 0; i < app.renderer.width / (config.sqSize / 2); i++) {
@@ -170,7 +119,6 @@ PIXI.loader.add('fun', 'img/fun.png').load(function (loader, resources) {
                 diamonds.push(diamond);
             }
         }
-        //app.stage.addChild(container);
 
         return container;
     }
@@ -191,7 +139,15 @@ PIXI.loader.add('fun', 'img/fun.png').load(function (loader, resources) {
     // bigPattern.anchor.set(0.5, 0.5);
     app.stage.addChild(bigPattern);
 
-    // Add the fun to the scene we are building
+    var logo = new PIXI.Sprite(resources.logo.texture);
+    logo.x = app.renderer.width / 2;
+    logo.y = app.renderer.height / 2;
+    logo.anchor.x = 0.5;
+    logo.anchor.y = 0.5;
+    logo.scale.x = .2;
+    logo.scale.y = .2;
+    //app.stage.addChild(logo);
+
 
     //let diamondsShuffled = shuffle(diamonds);
     var diamondsShuffled = diamonds;

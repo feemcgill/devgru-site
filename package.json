@@ -4,7 +4,9 @@
   "description": "Real Simple",
   "author": "Brendan",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "gulp-sass": "^4.0.1"
+  },
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-env": "^1.6.1",
@@ -17,7 +19,6 @@
     "gulp-minify": "0.0.14",
     "gulp-plumber": "^1.1.0",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
     "gulp-uglify": "^2.0.0",
     "jshint": "^2.9.3"
   }
