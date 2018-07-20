@@ -5,4 +5,6 @@ const app = new PIXI.Application({
  // forceCanvas : true
 });
 
+document.body.appendChild(app.view);
+
 export default app;

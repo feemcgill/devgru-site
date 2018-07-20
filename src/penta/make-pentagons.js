@@ -20,6 +20,8 @@ const makePentagon = function(color) {
   shapeBox.interactive = true;
   shapeBox.buttonMode = true;
   shapeBox.on('mouseover', onMouseover);
+  shapeBox.on('touchenter', onMouseover);
+  
   shapeBox.hitArea = new PIXI.Rectangle(0, 0, config.sqSize, config.sqSize);
 
 
