@@ -1,6 +1,10 @@
 'use strict';
 
-function shuffle(array) {
+Object.defineProperty(exports, "__esModule", {
+    value: true
+});
+
+var shuffleArray = function shuffleArray(array) {
     var currentIndex = array.length,
         temporaryValue,
         randomIndex;
@@ -16,13 +20,45 @@ function shuffle(array) {
     }
 
     return array;
-}
+};
+
+var resizeInit = function resizeInit() {
+    (function ($, sr) {
+
+        var debounce = function debounce(func, threshold, execAsap) {
+            var timeout;
+
+            return function debounced() {
+                var obj = this,
+                    args = arguments;
+                function delayed() {
+                    if (!execAsap) func.apply(obj, args);
+                    timeout = null;
+                };
+
+                if (timeout) clearTimeout(timeout);else if (execAsap) func.apply(obj, args);
+
+                timeout = setTimeout(delayed, threshold || 50);
+            };
+        };
+        // smartresize 
+        jQuery.fn[sr] = function (fn) {
+            return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr);
+        };
+    })(jQuery, 'smartresize');
+};
+
+exports.shuffleArray = shuffleArray;
+exports.resizeInit = resizeInit;
+'use strict';
+
+var _helpers = require('./helpers.js');
 
 var app = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
-    backgroundColor: 0xFFFFFF,
-    forceCanvas: true
+    backgroundColor: 0xFFFFFF
+    // forceCanvas : true
 });
 
 document.body.appendChild(app.view);
@@ -33,8 +69,9 @@ var bigPattern = void 0;
 
 var config = {
     sqSize: 200,
-    sqAcross: 20,
-    sqDown: 10,
+    sqThick: 2,
+    sqAcross: 16,
+    sqDown: 16,
     colors: {
         red: 0xB33450,
         green: 0x427D3B,
@@ -43,7 +80,7 @@ var config = {
     }
 };
 
-PIXI.loader.add('logo', 'img/devgru-logo.png').load(function (loader, resources) {
+PIXI.loader.add('logo', 'img/devgru-logo.png').add('penta', 'img/devgru-logo-penta.png').load(function (loader, resources) {
 
     var colorArray = [config.colors.red, config.colors.green, config.colors.blue, config.colors.yellow, config.colors.green, config.colors.red, config.colors.yellow, config.colors.blue];
 
@@ -57,8 +94,8 @@ PIXI.loader.add('logo', 'img/devgru-logo.png').load(function (loader, resources)
         shapeBox.hitArea = new PIXI.Rectangle(0, 0, config.sqSize, config.sqSize);
 
         function onMouseover() {
-            TweenMax.to(diamond.scale, .3, { x: 0.62, y: 0.62, onComplete: function onComplete() {
-                    TweenMax.to(diamond.scale, .5, { x: 1, y: 1, delay: 1.3 });
+            TweenMax.to(shapeBox.scale, .3, { x: 0.62, y: 0.62, onComplete: function onComplete() {
+                    TweenMax.to(shapeBox.scale, .5, { x: 1, y: 1, delay: 1.3 });
                 } });
         }
         if (testShape) {
@@ -73,7 +110,7 @@ PIXI.loader.add('logo', 'img/devgru-logo.png').load(function (loader, resources)
         var diamond = new PIXI.Graphics();
         shapeBox.addChild(diamond);
 
-        diamond.lineStyle(2, color, 0.7, 0.005);
+        diamond.lineStyle(config.sqThick, color, 0.7, 0.005);
         diamond.alpha = 1;
 
         diamond.moveTo(ss / 2, 0);
@@ -83,11 +120,25 @@ PIXI.loader.add('logo', 'img/devgru-logo.png').load(function (loader, resources)
         diamond.lineTo(0, ss / 3);
         diamond.lineTo(ss / 2, 0);
 
-        //diamond.rotation = 0.785398;
-        diamond.pivot.x = config.sqSize / 2;
-        diamond.pivot.y = config.sqSize / 2;
+        diamond.rotation = 0.785398;
+
+        // diamond.pivot.x = config.sqSize / 2;
+        // diamond.pivot.y = config.sqSize / 2;
         diamond.x = config.sqSize / 2;
         diamond.y = config.sqSize / 2;
+
+        // const logo = new PIXI.Sprite(resources.penta.texture);
+        // // logo.x = app.renderer.width / 2;
+        // // logo.y = app.renderer.height / 2;
+        // logo.x = config.sqSize / 2;
+        // logo.y = config.sqSize / 2;        
+        // logo.anchor.x = 0.5;
+        // logo.anchor.y = 0.5;
+        // logo.scale.x = .17;
+        // logo.scale.y = .17;
+        // shapeBox.addChild(logo);
+
+
         shapeBox.width = 1;
         shapeBox.height = 1;
         //shapeBox.anchor.set(0.5);
@@ -139,24 +190,24 @@ PIXI.loader.add('logo', 'img/devgru-logo.png').load(function (loader, resources)
     // bigPattern.anchor.set(0.5, 0.5);
     app.stage.addChild(bigPattern);
 
-    var logo = new PIXI.Sprite(resources.logo.texture);
-    logo.x = app.renderer.width / 2;
-    logo.y = app.renderer.height / 2;
-    logo.anchor.x = 0.5;
-    logo.anchor.y = 0.5;
-    logo.scale.x = .2;
-    logo.scale.y = .2;
-    //app.stage.addChild(logo);
+    // const logo = new PIXI.Sprite(resources.logo.texture);
+    // logo.x = app.renderer.width / 2;
+    // logo.y = app.renderer.height / 2;
+    // logo.anchor.x = 0.5;
+    // logo.anchor.y = 0.5;
+    // logo.scale.x = .5;
+    // logo.scale.y = .5;
+    // app.stage.addChild(logo);
 
 
-    //let diamondsShuffled = shuffle(diamonds);
+    //let diamondsShuffled = shuffleArray(diamonds);
     var diamondsShuffled = diamonds;
 
     var rotateSpeed = void 0;
 
     setInterval(function () {
-        //diamondsShuffled = shuffle(diamonds);
-        //diamondsShuffled = diamondsShuffled.reverse();
+        //diamondsShuffled = shuffleArray(diamonds);
+        diamondsShuffled = diamondsShuffled.reverse();
         //rotateSpeed = (Math.random() * (0.5 - 0.00500) + 0.00500);  
         //console.log(rotateSpeed);
     }, 3000);
@@ -212,29 +263,7 @@ function sizeIt() {
     }
 }
 
-(function ($, sr) {
-
-    var debounce = function debounce(func, threshold, execAsap) {
-        var timeout;
-
-        return function debounced() {
-            var obj = this,
-                args = arguments;
-            function delayed() {
-                if (!execAsap) func.apply(obj, args);
-                timeout = null;
-            };
-
-            if (timeout) clearTimeout(timeout);else if (execAsap) func.apply(obj, args);
-
-            timeout = setTimeout(delayed, threshold || 50);
-        };
-    };
-    // smartresize 
-    jQuery.fn[sr] = function (fn) {
-        return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr);
-    };
-})(jQuery, 'smartresize');
+(0, _helpers.resizeInit)();
 
 jQuery(window).smartresize(function () {
     sizeIt();

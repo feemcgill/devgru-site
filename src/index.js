@@ -1,25 +1,11 @@
-function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
-  
-    while (0 !== currentIndex) {
-  
-      randomIndex = Math.floor(Math.random() * currentIndex);
-      currentIndex -= 1;
-  
-      temporaryValue = array[currentIndex];
-      array[currentIndex] = array[randomIndex];
-      array[randomIndex] = temporaryValue;
-    }
-  
-    return array;
-}
 
+import {shuffleArray, resizeInit} from './helpers.js';
 
 const app = new PIXI.Application({
     width: window.innerWidth,
     height: window.innerHeight,
     backgroundColor : 0xFFFFFF,
-    forceCanvas : true
+   // forceCanvas : true
 });
 
 
@@ -31,8 +17,9 @@ let bigPattern;
 
 const config = {
     sqSize: 200,
-    sqAcross: 20,
-    sqDown: 10,
+    sqThick: 2,
+    sqAcross: 16,
+    sqDown: 16,
     colors: {
         red: 0xB33450,
         green: 0x427D3B,
@@ -42,7 +29,9 @@ const config = {
 };
 
 
-PIXI.loader.add('logo', 'img/devgru-logo.png').load((loader, resources) => {
+PIXI.loader.add('logo', 'img/devgru-logo.png')
+           .add('penta', 'img/devgru-logo-penta.png')
+           .load((loader, resources) => {
 
 
     const colorArray = [
@@ -71,10 +60,9 @@ PIXI.loader.add('logo', 'img/devgru-logo.png').load((loader, resources) => {
 
 
         function onMouseover () {
-            TweenMax.to(diamond.scale, .3, {x: 0.62,y : 0.62, onComplete: function(){
-                TweenMax.to(diamond.scale, .5, {x: 1,y : 1, delay: 1.3});
+            TweenMax.to(shapeBox.scale, .3, {x: 0.62,y : 0.62, onComplete: function(){
+                TweenMax.to(shapeBox.scale, .5, {x: 1,y : 1, delay: 1.3});
             }});
-
         }
         if (testShape) {
             const bg = new PIXI.Graphics();
@@ -88,7 +76,7 @@ PIXI.loader.add('logo', 'img/devgru-logo.png').load((loader, resources) => {
         const diamond = new PIXI.Graphics();
         shapeBox.addChild(diamond);
 
-        diamond.lineStyle(2, color, 0.7, 0.005);
+        diamond.lineStyle(config.sqThick, color, 0.7, 0.005);
         diamond.alpha = 1;
 
         diamond.moveTo(ss/2, 0);
@@ -98,11 +86,27 @@ PIXI.loader.add('logo', 'img/devgru-logo.png').load((loader, resources) => {
         diamond.lineTo(0, ss/3);
         diamond.lineTo(ss/2, 0);
 
-        //diamond.rotation = 0.785398;
-        diamond.pivot.x = config.sqSize / 2;
-        diamond.pivot.y = config.sqSize / 2;
+        diamond.rotation = 0.785398;
+
+
+        // diamond.pivot.x = config.sqSize / 2;
+        // diamond.pivot.y = config.sqSize / 2;
         diamond.x = config.sqSize / 2;
         diamond.y = config.sqSize / 2;
+
+        // const logo = new PIXI.Sprite(resources.penta.texture);
+        // // logo.x = app.renderer.width / 2;
+        // // logo.y = app.renderer.height / 2;
+        // logo.x = config.sqSize / 2;
+        // logo.y = config.sqSize / 2;        
+        // logo.anchor.x = 0.5;
+        // logo.anchor.y = 0.5;
+        // logo.scale.x = .17;
+        // logo.scale.y = .17;
+        // shapeBox.addChild(logo);
+
+
+
         shapeBox.width = 1;
         shapeBox.height = 1;
         //shapeBox.anchor.set(0.5);
@@ -160,14 +164,14 @@ PIXI.loader.add('logo', 'img/devgru-logo.png').load((loader, resources) => {
     // bigPattern.anchor.set(0.5, 0.5);
     app.stage.addChild(bigPattern);
 
-    const logo = new PIXI.Sprite(resources.logo.texture);
-    logo.x = app.renderer.width / 2;
-    logo.y = app.renderer.height / 2;
-    logo.anchor.x = 0.5;
-    logo.anchor.y = 0.5;
-    logo.scale.x = .2;
-    logo.scale.y = .2;
-    //app.stage.addChild(logo);
+    // const logo = new PIXI.Sprite(resources.logo.texture);
+    // logo.x = app.renderer.width / 2;
+    // logo.y = app.renderer.height / 2;
+    // logo.anchor.x = 0.5;
+    // logo.anchor.y = 0.5;
+    // logo.scale.x = .5;
+    // logo.scale.y = .5;
+    // app.stage.addChild(logo);
 
    
 
@@ -175,14 +179,14 @@ PIXI.loader.add('logo', 'img/devgru-logo.png').load((loader, resources) => {
 
 
 
-    //let diamondsShuffled = shuffle(diamonds);
+    //let diamondsShuffled = shuffleArray(diamonds);
     let diamondsShuffled = diamonds;
 
     let rotateSpeed;
     
     setInterval(function(){
-        //diamondsShuffled = shuffle(diamonds);
-        //diamondsShuffled = diamondsShuffled.reverse();
+        //diamondsShuffled = shuffleArray(diamonds);
+        diamondsShuffled = diamondsShuffled.reverse();
         //rotateSpeed = (Math.random() * (0.5 - 0.00500) + 0.00500);  
         //console.log(rotateSpeed);
     }, 3000);
@@ -242,35 +246,8 @@ function sizeIt() {
 
 }
 
+   resizeInit();
 
-
-(function($,sr){
-
-    var debounce = function (func, threshold, execAsap) {
-        var timeout;
-  
-        return function debounced () {
-            var obj = this, args = arguments;
-            function delayed () {
-                if (!execAsap)
-                    func.apply(obj, args);
-                timeout = null; 
-            };
-  
-            if (timeout)
-                clearTimeout(timeout);
-            else if (execAsap)
-                func.apply(obj, args);
-  
-            timeout = setTimeout(delayed, threshold || 50); 
-        };
-    }
-      // smartresize 
-      jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
-  
-  })(jQuery,'smartresize');
-  
-  
   jQuery(window).smartresize(function(){  
       sizeIt();
   }); 
