@@ -3,16 +3,35 @@ import app from './app.js';
 
 
 const initLogo = function(){
-  const theLogo = new PIXI.Sprite();
-  
-  const logoImg = new PIXI.Sprite.fromImage('img/devgru-logo-reverse.png');
-  logoImg.scale.x = .5;
-  logoImg.scale.y = .5;
+  const theLogo = new PIXI.Container();
+  theLogo.width = app.renderer.width;
+  theLogo.height = app.renderer.height;
+
+  const logoBg = new PIXI.Sprite();
+  //logoBg.tint = 0xFFA09A; 
+  logoBg.width = app.renderer.width;
+  logoBg.height = app.renderer.height;
+  theLogo.addChild(logoBg);
+
+
+  const logoImg = new PIXI.Sprite.fromImage('img/devgru-longtype.png');
+  logoImg.scale.x = 0.8;
+  logoImg.scale.y = 0.8;
+  // logoImg.anchor.set(0.5);
+  // logoImg.x = app.renderer.width / 2;
+  // logoImg.y = app.renderer.height / 2;
+  logoImg.x = 50;
+  logoImg.y = 500;
   theLogo.addChild(logoImg);
-  const logoMask = new PIXI.Sprite.fromImage('img/dither.png');
+  //const logoMask = new PIXI.Sprite.fromImage('img/dither.png');
+  const logoMask = new PIXI.Sprite(PIXI.Texture.WHITE);
+  logoMask.width = app.renderer.width;
+  logoMask.height = app.renderer.height;  
+  logoMask.tint = 0x000000; 
+
   // logoMask.scale.x = .5;
   // logoMask.scale.y = .5;
-  theLogo.addChild(logoMask);
+  //theLogo.addChild(logoMask);
 
   /*
   // logoMask.mask = logoImg;
@@ -48,7 +67,7 @@ const initLogo = function(){
     }
   }   
   */
-  logoMask.mask = logoImg;
+  //logoMask.mask = logoImg;
   return theLogo;
 }
 

@@ -103,8 +103,8 @@ const makePentagons = function(){
       for (let i = 0; i < config.sqDown; i++) {
           const diamond = makePentagon(colorArray[i%colorArray.length]);
           container.addChild(diamond);
-          diamond.x = a * (app.renderer.width / config.sqAcross);
-          diamond.y = i * (app.renderer.height / config.sqDown);
+          diamond.x = a * ((app.renderer.width + config.sqSize) / config.sqAcross);
+          diamond.y = i * ((app.renderer.height + config.sqSize) / config.sqDown);
       }
   }        
 
