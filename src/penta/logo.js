@@ -17,10 +17,11 @@ const initLogo = function(){
   const logoImg = new PIXI.Sprite.fromImage('img/devgru-longtype.png');
   logoImg.scale.x = 0.8;
   logoImg.scale.y = 0.8;
+  logoImg.rotation = -0.03;
   // logoImg.anchor.set(0.5);
   // logoImg.x = app.renderer.width / 2;
   // logoImg.y = app.renderer.height / 2;
-  logoImg.x = 50;
+  logoImg.x = 200;
   logoImg.y = 500;
   theLogo.addChild(logoImg);
   //const logoMask = new PIXI.Sprite.fromImage('img/dither.png');
