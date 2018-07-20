@@ -8,7 +8,6 @@ const initLogo = function(){
   theLogo.height = app.renderer.height;
 
   const logoBg = new PIXI.Sprite();
-  //logoBg.tint = 0xFFA09A; 
   logoBg.width = app.renderer.width;
   logoBg.height = app.renderer.height;
   theLogo.addChild(logoBg);
@@ -24,51 +23,38 @@ const initLogo = function(){
   logoImg.x = 200;
   logoImg.y = 500;
   theLogo.addChild(logoImg);
-  //const logoMask = new PIXI.Sprite.fromImage('img/dither.png');
-  const logoMask = new PIXI.Sprite(PIXI.Texture.WHITE);
-  logoMask.width = app.renderer.width;
-  logoMask.height = app.renderer.height;  
-  logoMask.tint = 0x000000; 
 
-  // logoMask.scale.x = .5;
-  // logoMask.scale.y = .5;
-  //theLogo.addChild(logoMask);
 
-  /*
-  // logoMask.mask = logoImg;
-  const logoMask = new PIXI.Sprite();
-  theLogo.addChild(logoMask);
 
-  for (let a = 0; a <  20; a++) {
-    for (let i = 0; i < 20; i++) {
-      const square = new PIXI.Sprite(PIXI.Texture.WHITE);
-      // square.beginFill(0x000000);
-      // square.drawRect((a * (600 / 20)), (i * (600 / 20)), (600 / 20), (600 / 20));
-      // square.endFill();
-      logoMask.addChild(square);
-      square.width = (600 / 20);
-      square.height = (600 / 20);
-      square.x = (a * (600 / 20));
-      square.y = (i * (600 / 20));
-      square.tint = 0x000000; 
-      square.interactive = true;
-      square.buttonMode = true;
-      square.on('mouseover', onMouseover);
-      square.on('touchenter', onMouseover);
-      square.anchor.x = 0.5;
-      square.anchor.y = 0.5;      
-      function onMouseover () {
-        console.log(square.scale);
-        TweenMax.to(square, .6, {rotation: 6.28319, delay: 0});
-        TweenMax.to(square.scale, .3, {x: 2.3,y : 2.7, onComplete: function(){
-            TweenMax.to(square.scale, .1, {x: 3,y : 3, delay: .2});
+  var displacementSprite = PIXI.Sprite.fromImage('img/gradient1.png');
+  //displacementSprite.scale.set(0.2);
+  var displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
+  
+  theLogo.addChild(displacementSprite);
+  
+  theLogo.filters = [displacementFilter];
+  
+  displacementFilter.scale.x = 500;
+  displacementFilter.scale.y = 500;
+  displacementSprite.anchor.set(0.5);
+  
+  logoImg.interactive = true;
+  
+  logoImg
+      .on('mousemove', onPointerMove)
+      .on('touchmove', onPointerMove);
+  
+  function onPointerMove(eventData) {
+      displacementSprite.position.set(eventData.data.global.x - 25, eventData.data.global.y);
+  }
+    
 
-        }});
-    }            
-    }
-  }   
-  */
-  //logoMask.mask = logoImg;
+
+
+
+
+
+
   return theLogo;
 }
 

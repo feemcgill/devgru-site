@@ -18,7 +18,6 @@ const makePentagon = function(color) {
 
 
   shapeBox.interactive = true;
-  shapeBox.buttonMode = true;
   shapeBox.on('mouseover', onMouseover);
   shapeBox.on('touchenter', onMouseover);
   

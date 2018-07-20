@@ -27,7 +27,7 @@ bigPattern.y = -config.sqSize / 4;
 app.stage.addChild(bigPattern);
 
 const logo = initLogo();
-console.log(logo);
+
 // logo.scale.set(0.5);
 // logo.anchor.set(0.5);
 // logo.x = app.renderer.width / 2 - 200;
@@ -35,29 +35,6 @@ console.log(logo);
 
 
 app.stage.addChild(logo);
-
-
-var displacementSprite = PIXI.Sprite.fromImage('img/gradient1.png');
-displacementSprite.scale.set(1);
-var displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
-
-bigPattern.addChild(displacementSprite);
-
-logo.filters = [displacementFilter];
-
-displacementFilter.scale.x = 110;
-displacementFilter.scale.y = 110;
-displacementSprite.anchor.set(0.5);
-
-bigPattern.interactive = true;
-
-bigPattern
-    .on('mousemove', onPointerMove)
-    .on('touchmove', onPointerMove);
-
-function onPointerMove(eventData) {
-    displacementSprite.position.set(eventData.data.global.x - 25, eventData.data.global.y);
-}
 
 
 
