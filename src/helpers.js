@@ -15,6 +15,7 @@ const shuffleArray = function(array){
   return array;
 }
 
+
 const resizeInit = function() {
   (function($,sr){
 
@@ -44,6 +45,14 @@ const resizeInit = function() {
 }
 
 
+function getWindowSize(){
+	const wWidth = window.innerWidth;
+    const wHeight = window.innerHeight;
+    const data = {
+        width: wWidth,
+        height: wHeight
+    };
+    return data;
+}
 
-
-export {shuffleArray, resizeInit};
+export {shuffleArray, resizeInit, getWindowSize};
