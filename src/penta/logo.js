@@ -1,5 +1,6 @@
 import {loader} from './loader.js';
 import app from './app.js';
+import {debounce, getWindowSize} from './../helpers.js';
 
 
 const initLogo = function(){
@@ -21,7 +22,7 @@ const initLogo = function(){
   // logoImg.x = app.renderer.width / 2;
   // logoImg.y = app.renderer.height / 2;
   logoImg.x = 200;
-  logoImg.y = 500;
+  logoImg.y = app.renderer.height - (app.renderer.height / 3);
   theLogo.addChild(logoImg);
 
 
@@ -47,14 +48,26 @@ const initLogo = function(){
   function onPointerMove(eventData) {
       displacementSprite.position.set(eventData.data.global.x - 25, eventData.data.global.y);
   }
+
+
+  // RESIZE
+  function reSizeIt() {
+    // Get new size
+    const size = getWindowSize();
+    const w = size.width;
+    const h = size.height;
+
+    // Scale renderer
+    theLogo.width = w;    
+    theLogo.height = h;
+    TweenMax.to(logoImg, 0.5, {y: h - (h / 3)});
+  }
+
+
+  window.addEventListener("resize",debounce(function(e){
+    reSizeIt();
+  }));  
     
-
-
-
-
-
-
-
   return theLogo;
 }
 

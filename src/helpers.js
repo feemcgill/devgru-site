@@ -15,36 +15,6 @@ const shuffleArray = function(array){
   return array;
 }
 
-
-const resizeInit = function() {
-  (function($,sr){
-
-    var debounce = function (func, threshold, execAsap) {
-        var timeout;
-  
-        return function debounced () {
-            var obj = this, args = arguments;
-            function delayed () {
-                if (!execAsap)
-                    func.apply(obj, args);
-                timeout = null; 
-            };
-  
-            if (timeout)
-                clearTimeout(timeout);
-            else if (execAsap)
-                func.apply(obj, args);
-  
-            timeout = setTimeout(delayed, threshold || 50); 
-        };
-    }
-      // smartresize 
-      jQuery.fn[sr] = function(fn){  return fn ? this.bind('resize', debounce(fn)) : this.trigger(sr); };
-  
-  })(jQuery,'smartresize');
-}
-
-
 function getWindowSize(){
 	const wWidth = window.innerWidth;
     const wHeight = window.innerHeight;
@@ -55,4 +25,12 @@ function getWindowSize(){
     return data;
 }
 
-export {shuffleArray, resizeInit, getWindowSize};
+const debounce = function(func){
+    var timer;
+    return function(event){
+        if(timer) clearTimeout(timer);
+        timer = setTimeout(func,100,event);
+    };
+}
+
+export {shuffleArray, getWindowSize, debounce};

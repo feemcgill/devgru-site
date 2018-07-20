@@ -25,7 +25,7 @@ const makePentagon = function(color) {
 
 
   function onMouseover () {
-      TweenMax.to(shapeBox.scale, .3, {x: 0.62,y : 0.62, onComplete: function(){
+      TweenMax.to(shapeBox.scale, .3, {x: 1.32,y : 1.32, onComplete: function(){
           TweenMax.to(shapeBox.scale, .5, {x: 1,y : 1, delay: 1.3});
       }});
   }
@@ -41,7 +41,7 @@ const makePentagon = function(color) {
   const diamond = new PIXI.Graphics();
   shapeBox.addChild(diamond);
 
-  diamond.lineStyle(config.sqThick, color, 0.7, 0.005);
+  diamond.lineStyle(config.sqThick, color, 0.35, 0);
   diamond.alpha = 1;
 
   diamond.moveTo(ss/2, 0);
@@ -86,17 +86,6 @@ const makePentagon = function(color) {
 
 const makePentagons = function(){
   let container = new PIXI.Sprite(); 
-  
-  // for (let a = 0; a <  app.renderer.height / (config.sqSize / 2); a++) {
-  //     for (let i = 0; i < app.renderer.width / (config.sqSize / 2); i++) {
-  //         const diamond = makePentagon(colorArray[i%colorArray.length]);
-  //         container.addChild(diamond);
-  //         diamond.x = i * config.sqSize * .5;
-  //         diamond.y = a * config.sqSize * .5;
-  //         diamonds.push(diamond);
-  //     }
-  // }
-
 
   for (let a = 0; a <  config.sqAcross; a++) {
       for (let i = 0; i < config.sqDown; i++) {
@@ -109,5 +98,6 @@ const makePentagons = function(){
 
   return container;
 }
+
 
 export {makePentagon, makePentagons};
