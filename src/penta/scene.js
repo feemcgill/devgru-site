@@ -25,6 +25,9 @@ let pentagons = pentagonJam.children;
 let pentagonsShuffled = pentagons;
 
 
+
+
+
 setInterval(function(){
   pentagonsShuffled = pentagonsShuffled.reverse();
 }, 3000);

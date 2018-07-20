@@ -22,23 +22,29 @@ const initLogo = function(){
   // logoImg.x = app.renderer.width / 2;
   // logoImg.y = app.renderer.height / 2;
   logoImg.x = 200;
-  logoImg.y = app.renderer.height - (app.renderer.height / 3);
+  logoImg.y = app.renderer.height - (app.renderer.height / 1.5);
   theLogo.addChild(logoImg);
 
 
 
   var displacementSprite = PIXI.Sprite.fromImage('img/gradient1.png');
+  var displacementSpriteLook = PIXI.Sprite.fromImage('img/gradient1.png');
+
   //displacementSprite.scale.set(0.2);
   var displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
   
   theLogo.addChild(displacementSprite);
+  //theLogo.addChild(displacementSpriteLook);
   
   theLogo.filters = [displacementFilter];
   
   displacementFilter.scale.x = 500;
   displacementFilter.scale.y = 500;
   displacementSprite.anchor.set(0.5);
-  
+
+  displacementSpriteLook.anchor.set(0.5);
+  displacementSpriteLook.alpha = 0.2;
+
   logoImg.interactive = true;
   
   logoImg
@@ -47,6 +53,7 @@ const initLogo = function(){
   
   function onPointerMove(eventData) {
       displacementSprite.position.set(eventData.data.global.x - 25, eventData.data.global.y);
+      displacementSpriteLook.position.set(eventData.data.global.x - 25, eventData.data.global.y);
   }
 
 
@@ -60,7 +67,7 @@ const initLogo = function(){
     // Scale renderer
     theLogo.width = w;    
     theLogo.height = h;
-    TweenMax.to(logoImg, 0.5, {y: h - (h / 3)});
+    TweenMax.to(logoImg, 0.5, {y: h - (h / 1.5)});
   }
 
 
