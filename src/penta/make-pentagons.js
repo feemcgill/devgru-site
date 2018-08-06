@@ -34,23 +34,24 @@ const makePentagon = function(color) {
       bg.beginFill(0x9cffd0, 1);
       bg.drawRect(0, 0, config.sqSize, config.sqSize);        
       bg.endFill();
-      bg.alpha = 0.2;
+      bg.alpha = 0.1;
       shapeBox.addChild(bg);
   }
 
   const diamond = new PIXI.Graphics();
   shapeBox.addChild(diamond);
 
-  diamond.lineStyle(config.sqThick, color, 0.35, 0);
+  diamond.lineStyle(config.sqThick, 0x000000, 1, 0);
   diamond.alpha = 1;
-
+  //diamond.beginFill(0xffffff);
   diamond.moveTo(ss/2, 0);
   diamond.lineTo(ss, ss/3);
   diamond.lineTo(ss - (ss * 0.2) , ss - (ss * 0.05));
   diamond.lineTo((ss * 0.2) , ss - (ss * 0.05));
   diamond.lineTo(0, ss/3);
   diamond.lineTo(ss/2, 0);
-
+  //diamond.endFill();
+  diamond.alpha = 1;
   diamond.rotation = 0.785398;
 
 

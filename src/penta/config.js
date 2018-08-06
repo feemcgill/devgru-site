@@ -1,6 +1,6 @@
 const config = {
   sqSize: 200,
-  sqThick: 2,
+  sqThick: 1,
   sqAcross: 16,
   sqDown: 16,
   colors: {

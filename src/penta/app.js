@@ -1,7 +1,7 @@
 const app = new PIXI.Application({
   width: window.innerWidth,
   height: window.innerHeight,
-  backgroundColor : 0xFFFFFF,
+  backgroundColor : 0xffffff,
  // forceCanvas : true
 });
 
