@@ -27,36 +27,6 @@ const initLogo = function(){
 
 
 
-  var displacementSprite = PIXI.Sprite.fromImage('img/gradient1.png');
-  var displacementSpriteLook = PIXI.Sprite.fromImage('img/gradient1.png');
-
-  //displacementSprite.scale.set(0.2);
-  var displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
-  
-  theLogo.addChild(displacementSprite);
-  //theLogo.addChild(displacementSpriteLook);
-  console.log('asdfasdf');
-  theLogo.filters = [displacementFilter];
-  
-  displacementFilter.scale.x = 500;
-  displacementFilter.scale.y = 500;
-  displacementSprite.anchor.set(0.5);
-
-  displacementSpriteLook.anchor.set(0.5);
-  displacementSpriteLook.alpha = 0.2;
-
-  logoImg.interactive = true;
-  
-  logoImg
-      .on('mousemove', onPointerMove)
-      .on('touchmove', onPointerMove);
-  
-  function onPointerMove(eventData) {
-      displacementSprite.position.set(eventData.data.global.x - 25, eventData.data.global.y);
-      displacementSpriteLook.position.set(eventData.data.global.x - 25, eventData.data.global.y);
-  }
-
-
 
   // RESIZE
   function reSizeIt() {

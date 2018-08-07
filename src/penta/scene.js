@@ -6,7 +6,9 @@ import config from './config.js';
 import app from './app.js';
 import initLogo from './logo.js';
 import initHalftone from './halftone.js';
-
+import displacement from './displacement.js';
+import theTag from './tagline.js';
+import theLocation from './location.js';
 
 const bigPattern = new PIXI.Sprite();
 bigPattern.x = -config.sqSize / 4;
@@ -23,6 +25,12 @@ const border = initBorder();
 app.stage.addChild(border);
 
 
+const tagline = theTag();
+app.stage.addChild(tagline);
+
+const location = theLocation();
+app.stage.addChild(location);
+
 
 // const halftone = initHalftone();
 // app.stage.addChild(halftone);
@@ -31,6 +39,31 @@ app.stage.addChild(border);
 let pentagons = pentagonJam.children;
 let pentagonsShuffled = pentagons;
 
+
+// displace
+let displaceTex = PIXI.Texture.fromImage('img/disp/10.png');
+let displaceTex2 = PIXI.Texture.fromImage('img/disp/1.png');
+let displaceTex3 = PIXI.Texture.fromImage('img/disp/5.png');
+
+
+displacement({
+  texture: displaceTex,
+  displacedElement: logo,
+  container: app.stage
+});
+
+displacement({
+  texture: displaceTex2,
+  displacedElement: tagline,
+  container: app.stage
+});
+
+
+displacement({
+  texture: displaceTex2,
+  displacedElement: location,
+  container: app.stage
+});
 
 
 // TICKER
@@ -42,6 +75,15 @@ app.ticker.add(() => {
   } else {
     logo.x += 1;
   }
+
+
+  if (location.y > app.renderer.height) {
+    location.y = -1000;
+  } else {
+    location.y += 1;
+  }
+
+
   for (let i = 0; i < pentagons.length; i++) {
       const element = pentagonsShuffled[i];
       element.rotation += 0.01 * (i * 0.006);
