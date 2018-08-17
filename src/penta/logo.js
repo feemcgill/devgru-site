@@ -21,8 +21,8 @@ const initLogo = function(){
   // logoImg.anchor.set(0.5);
   // logoImg.x = app.renderer.width / 2;
   // logoImg.y = app.renderer.height / 2;
-  logoImg.x = 200;
-  logoImg.y = app.renderer.height - (app.renderer.height / 1.5);
+ // logoImg.x = 200;
+  //logoImg.y = app.renderer.height - (app.renderer.height / 1.5);
   theLogo.addChild(logoImg);
 
 

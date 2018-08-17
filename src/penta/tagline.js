@@ -17,7 +17,7 @@ const tagLine = function(){
 
   tagSprite.x = 70;
   //tagSprite.y = app.renderer.height - 300;
-  tagSprite.y = 300;
+  tagSprite.y = app.renderer.height - 300;
   theTag.addChild(tagSprite);
 
   tagSprite.scale.set(0.01);

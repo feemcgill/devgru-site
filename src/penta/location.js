@@ -15,9 +15,9 @@ const theLocation = function(){
   locationSprite.rotation = 0.06;
 
 
-  locationSprite.x = 700;
-  //locationSprite.y = app.renderer.height - 300;
-  locationSprite.y = 100;
+  // locationSprite.x = 700;
+  // //locationSprite.y = app.renderer.height - 300;
+  // locationSprite.y = 100;
   locationContainer.addChild(locationSprite);
 
 
