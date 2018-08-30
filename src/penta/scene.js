@@ -28,16 +28,16 @@ bigPattern.addChild(pentagonJam);
 
 const logo = initLogo();
 app.stage.addChild(logo);
-logo.mask = quads[0];
+// logo.mask = quads[0];
 
 
-const tagline = theTag();
-app.stage.addChild(tagline);
-tagline.mask = quads[1];
+// const tagline = theTag();
+// app.stage.addChild(tagline);
+// tagline.mask = quads[1];
 
 const location = theLocation();
 app.stage.addChild(location);
-location.mask = quads[2];
+// location.mask = quads[2];
 // const halftone = initHalftone();
 // app.stage.addChild(halftone);
 
@@ -47,7 +47,9 @@ location.mask = quads[2];
 
 function positionLayout(){
   logo.y = 100;
+  logo.x = 100;
   location.x = app.renderer.width / 2;
+  location.y = app.renderer.width / 4;
 }
 
 positionLayout();
@@ -63,8 +65,8 @@ const border = initBorder();
 app.stage.addChild(border);
 
 
-let pentagons = pentagonJam.children;
-let pentagonsShuffled = pentagons;
+// let pentagons = pentagonJam.children;
+// let pentagonsShuffled = pentagons;
 
 
 
@@ -80,11 +82,11 @@ displacement({
   container: app.stage
 });
 
-displacement({
-  texture: displaceTex2,
-  displacedElement: tagline,
-  container: app.stage
-});
+// displacement({
+//   texture: displaceTex2,
+//   displacedElement: tagline,
+//   container: app.stage
+// });
 
 
 displacement({
@@ -98,24 +100,19 @@ displacement({
 app.ticker.add(() => {
 
   //console.log(logo.x);
-  if (logo.x > (app.renderer.width / 2)) {
-    logo.x = -1000;
-  } else {
-    logo.x += 1;
-  }
+  // if (logo.x > 0) {
+  //   logo.x = 100;
+  // } else {
+  //   logo.x -= 1;
+  // }
 
 
-  if (location.y > (app.renderer.height / 2)) {
-    location.y = -1000;
-  } else {
-    location.y += 1;
-  }
+  // if (location.y > (app.renderer.height / 2)) {
+  //   location.y = -1000;
+  // } else {
+  //   location.y += 1;
+  // }
 
-
-  for (let i = 0; i < pentagons.length; i++) {
-      const element = pentagonsShuffled[i];
-      element.rotation += 0.01 * (i * 0.006);
-  }
 });
 
 
@@ -133,17 +130,17 @@ function reSizeIt() {
 	app.renderer.resize(w,h);
 
   // Move pentagons
-  var cnt = 0;
-  for (let a = 0; a <  config.sqAcross; a++) {
-    for (let i = 0; i < config.sqDown; i++) {
-        var element = pentagons[cnt];
-        var x = a * ((app.renderer.width + config.sqSize) / config.sqAcross);
-        var y = i * ((app.renderer.height + config.sqSize) / config.sqDown);
-        var delay = ( cnt * .005);
-        TweenMax.to(element, .1, {x: x, y: y, delay: delay})
-        cnt ++;
-    }
-  }
+  // var cnt = 0;
+  // for (let a = 0; a <  config.sqAcross; a++) {
+  //   for (let i = 0; i < config.sqDown; i++) {
+  //       var element = pentagons[cnt];
+  //       var x = a * ((app.renderer.width + config.sqSize) / config.sqAcross);
+  //       var y = i * ((app.renderer.height + config.sqSize) / config.sqDown);
+  //       var delay = ( cnt * .005);
+  //       TweenMax.to(element, .1, {x: x, y: y, delay: delay})
+  //       cnt ++;
+  //   }
+  // }
 }
 
 

@@ -1,6 +1,6 @@
 //import {loader} from './loader.js';
 import app from './app.js';
-import {debounce, getWindowSize} from './../helpers.js';
+import {debounce, getWindowSize, map} from './../helpers.js';
 
 
 const theLocation = function(){
@@ -21,7 +21,28 @@ const theLocation = function(){
   locationContainer.addChild(locationSprite);
 
 
+  locationContainer.interactive = true;
+  locationContainer
+    .on('mousemove', onPointerMove)
+    .on('touchmove', onPointerMove)
 
+
+
+
+  function onPointerMove(eventData) {
+    var mx = eventData.data.global.x;
+    var my = eventData.data.global.y;
+
+    var moverX = map(mx, 0, app.renderer.width, -20, 20);
+    var moverY = map(my, 0, app.renderer.height, -20, 20);
+    
+    
+    TweenMax.to(locationSprite, 2, {
+      x:(locationContainer.width / 2) + moverX,
+      y:(locationContainer.height / 2) + moverY,	
+    })
+    
+} 
 
   // RESIZE
   function reSizeIt() {

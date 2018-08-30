@@ -1,5 +1,6 @@
 import config from './config.js';
 import app from './app.js';
+import {getWindowSize, debounce} from './../helpers.js';
 
 const colorArray = [
   config.colors.red,
@@ -95,8 +96,42 @@ const makePentagons = function(){
           diamond.x = a * ((app.renderer.width + config.sqSize) / config.sqAcross);
           diamond.y = i * ((app.renderer.height + config.sqSize) / config.sqDown);
       }
-  }        
+  }
+  
+    const pentagons = container.children;
 
+    app.ticker.add(() => {
+        for (let i = 0; i < pentagons.length; i++) {
+            const element = pentagons[i];
+            element.rotation += 0.01 * (i * 0.006);
+        }
+    }); 
+     
+    // RESIZE
+    function reSizeIt() {
+        // Get new size
+        const size = getWindowSize();
+
+    
+        // Move pentagons
+        var cnt = 0;
+        for (let a = 0; a <  config.sqAcross; a++) {
+        for (let i = 0; i < config.sqDown; i++) {
+            var element = pentagons[cnt];
+            var x = a * ((app.renderer.width + config.sqSize) / config.sqAcross);
+            var y = i * ((app.renderer.height + config.sqSize) / config.sqDown);
+            var delay = ( cnt * .005);
+            TweenMax.to(element, .1, {x: x, y: y, delay: delay})
+            cnt ++;
+        }
+        }
+    }
+    
+    
+    window.addEventListener("resize",debounce(function(e){
+        reSizeIt();
+    }));
+    container.interactive = true;
   return container;
 }
 

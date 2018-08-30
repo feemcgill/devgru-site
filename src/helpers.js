@@ -33,4 +33,9 @@ const debounce = function(func){
     };
 }
 
-export {shuffleArray, getWindowSize, debounce};
+const map = function (the_numb, in_min, in_max, out_min, out_max) {
+    return (the_numb - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+  }
+
+  
+export {shuffleArray, getWindowSize, debounce, map};
