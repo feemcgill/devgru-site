@@ -90,6 +90,19 @@ const makePentagons = function(){
       }
   }
 
+//   const col = [];
+//   for (let i = 0; i < pentagons.length; i++) {
+//       const e = pentagons[i];
+//       if (i % 2) {
+//         col.push(e);
+//       }
+//   }
+
+//   setTimeout(() => {
+//     TweenMax.staggerTo(col, 1.2, {y: - 1000} );
+//   }, 2000);
+
+
   container.addChild(shapes);
   
     app.ticker.add(() => {
