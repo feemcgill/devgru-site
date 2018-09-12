@@ -9,6 +9,7 @@ import initHalftone from './halftone.js';
 import displacement from './displacement.js';
 import theTag from './tagline.js';
 import theLocation from './location.js';
+import theIcons from './icons.js';
 import makeQuads from './quads.js';
 import theGame from './game.js';
 
@@ -17,11 +18,11 @@ bigPattern.x = -config.sqSize / 4;
 bigPattern.y = -config.sqSize / 4;
 app.stage.addChild(bigPattern);
 
-const quads = makeQuads();
-for (let i = 0; i < quads.length; i++) {
-  quads[i].alpha = 0;
-  app.stage.addChild(quads[i]);
-}
+// const quads = makeQuads();
+// for (let i = 0; i < quads.length; i++) {
+//   quads[i].alpha = 0;
+//   app.stage.addChild(quads[i]);
+// }
 
 const pentagonJam = makePentagons();
 bigPattern.addChild(pentagonJam);
@@ -37,19 +38,23 @@ app.stage.addChild(logo);
 
 const location = theLocation();
 app.stage.addChild(location);
+
 // location.mask = quads[2];
 // const halftone = initHalftone();
 // app.stage.addChild(halftone);
 
 
 
-
+const icons = theIcons();
+app.stage.addChild(icons);
 
 function positionLayout(){
   logo.y = 100;
   logo.x = 100;
   location.x = app.renderer.width / 2;
   location.y = app.renderer.width / 4;
+  icons.x = app.renderer.width - 300;
+  icons.y = app.renderer.height - 300;
 }
 
 positionLayout();
@@ -71,9 +76,15 @@ app.stage.addChild(border);
 
 
 // displace
-let displaceTex = PIXI.Texture.fromImage('img/disp/10.png');
+let displaceTex = PIXI.Texture.fromImage('img/disp/9.png');
 let displaceTex2 = PIXI.Texture.fromImage('img/disp/1.png');
 let displaceTex3 = PIXI.Texture.fromImage('img/disp/5.png');
+
+// displacement({
+//   texture: displaceTex2,
+//   displacedElement: bigPattern,
+//   container: app.stage
+// });
 
 
 displacement({
@@ -82,15 +93,8 @@ displacement({
   container: app.stage
 });
 
-// displacement({
-//   texture: displaceTex2,
-//   displacedElement: tagline,
-//   container: app.stage
-// });
-
-
 displacement({
-  texture: displaceTex2,
+  texture: displaceTex,
   displacedElement: location,
   container: app.stage
 });

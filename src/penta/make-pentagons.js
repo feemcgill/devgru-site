@@ -1,6 +1,6 @@
 import config from './config.js';
 import app from './app.js';
-import {getWindowSize, debounce} from './../helpers.js';
+import {getWindowSize, debounce, map} from './../helpers.js';
 
 const colorArray = [
   config.colors.red,
@@ -45,12 +45,13 @@ const makePentagon = function(color) {
   diamond.lineStyle(config.sqThick, 0x000000, 1, 0);
   diamond.alpha = 1;
   //diamond.beginFill(0xffffff);
-  diamond.moveTo(ss/2, 0);
-  diamond.lineTo(ss, ss/3);
-  diamond.lineTo(ss - (ss * 0.2) , ss - (ss * 0.05));
-  diamond.lineTo((ss * 0.2) , ss - (ss * 0.05));
-  diamond.lineTo(0, ss/3);
-  diamond.lineTo(ss/2, 0);
+//   diamond.moveTo(ss/2, 0);
+//   diamond.lineTo(ss, ss/3);
+//   diamond.lineTo(ss - (ss * 0.2) , ss - (ss * 0.05));
+//   diamond.lineTo((ss * 0.2) , ss - (ss * 0.05));
+//   diamond.lineTo(0, ss/3);
+//   diamond.lineTo(ss/2, 0);
+  diamond.drawRect(0,0,ss,ss);
   //diamond.endFill();
   diamond.alpha = 1;
   diamond.rotation = 0.785398;
@@ -60,17 +61,6 @@ const makePentagon = function(color) {
   // diamond.pivot.y = config.sqSize / 2;
   diamond.x = config.sqSize / 2;
   diamond.y = config.sqSize / 2;
-
-  // const logo = new PIXI.Sprite(resources.penta.texture);
-  // // logo.x = app.renderer.width / 2;
-  // // logo.y = app.renderer.height / 2;
-  // logo.x = config.sqSize / 2;
-  // logo.y = config.sqSize / 2;        
-  // logo.anchor.x = 0.5;
-  // logo.anchor.y = 0.5;
-  // logo.scale.x = .17;
-  // logo.scale.y = .17;
-  // shapeBox.addChild(logo);
 
 
 
@@ -87,19 +77,21 @@ const makePentagon = function(color) {
 
 
 const makePentagons = function(){
-  let container = new PIXI.Sprite(); 
-
+  const container = new PIXI.Container();
+  const shapes = new PIXI.Sprite();
+  const pentagons = [];
   for (let a = 0; a <  config.sqAcross; a++) {
       for (let i = 0; i < config.sqDown; i++) {
           const diamond = makePentagon(colorArray[i%colorArray.length]);
-          container.addChild(diamond);
+          shapes.addChild(diamond);
+          pentagons.push(diamond);
           diamond.x = a * ((app.renderer.width + config.sqSize) / config.sqAcross);
           diamond.y = i * ((app.renderer.height + config.sqSize) / config.sqDown);
       }
   }
-  
-    const pentagons = container.children;
 
+  container.addChild(shapes);
+  
     app.ticker.add(() => {
         for (let i = 0; i < pentagons.length; i++) {
             const element = pentagons[i];
@@ -132,6 +124,54 @@ const makePentagons = function(){
         reSizeIt();
     }));
     container.interactive = true;
+
+
+    let displaceTex = PIXI.Texture.fromImage('img/disp/9.png');
+    let displacementSprite = new PIXI.Sprite(displaceTex);
+    let displacementSprite_LOOK = new PIXI.Sprite(displaceTex);
+    var displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
+    container.addChild(displacementSprite);
+    //container.addChild(displacementSprite_LOOK);
+    displacementSprite_LOOK.tint = 0xFF0000;
+    displacementSprite_LOOK.alpha = 0.08;
+
+    shapes.filters = [displacementFilter];
+
+    displacementSprite.scale.set(5);
+    displacementFilter.scale.set(50);
+    displacementSprite.anchor.set(0.5);
+    displacementSprite.x = app.renderer.width / 2;
+    displacementSprite.y = app.renderer.height / 2;
+
+    displacementSprite_LOOK.anchor.set(0.5);
+
+    TweenMax.to(displacementSprite.scale, 15, {x: 3, y: 3, repeat: -1, yoyo: true, ease: Back.easeOut} );
+    container.interactive = true;
+    
+    container
+        .on('mousemove', onPointerMove)
+        .on('touchmove', onPointerMove);
+    
+    function onPointerMove(eventData) {
+
+        var moverX = map(eventData.data.global.x, 0, app.renderer.width, -150, 150);
+        var moverY = map(eventData.data.global.y, 0, app.renderer.height, -150, 150);
+
+        TweenMax.to(displacementSprite, 2, {
+            x:(app.renderer.width / 2) + moverX,
+            y:(app.renderer.height / 2) + moverY,	
+            x: eventData.data.global.x,
+            y: eventData.data.global.y,
+        });        
+        TweenMax.to(displacementSprite_LOOK, 2, {
+            x:(app.renderer.width / 2) + moverX,
+            y:(app.renderer.height / 2) + moverY,	
+            x: eventData.data.global.x,
+            y: eventData.data.global.y,
+        });
+    }      
+
+
   return container;
 }
 

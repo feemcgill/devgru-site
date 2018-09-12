@@ -1,5 +1,5 @@
 const config = {
-  sqSize: 200,
+  sqSize: 25,
   sqThick: 1,
   sqAcross: 16,
   sqDown: 16,
@@ -10,7 +10,7 @@ const config = {
       yellow: 0xD8B72D
   },
   test: {
-    testShape: false
+    testShape: true
   }
 };
 

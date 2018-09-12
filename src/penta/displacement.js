@@ -14,8 +14,8 @@ export default (config) => {
   
   config.displacedElement.filters = [displacementFilter];
   
-  // displacementFilter.scale.x = 100;
-  // displacementFilter.scale.y = 100;
+//   displacementFilter.scale.x = 1;
+//   displacementFilter.scale.y = 1;
   displacementSprite.anchor.set(0.5);
   
   displacementSpriteLook.anchor.set(0.5);
@@ -28,8 +28,8 @@ export default (config) => {
       .on('touchmove', onPointerMove);
   
   function onPointerMove(eventData) {
-      displacementSprite.position.set(eventData.data.global.x - 25, eventData.data.global.y);
-      displacementSpriteLook.position.set(eventData.data.global.x - 25, eventData.data.global.y);
+      displacementSprite.position.set(eventData.data.global.x , eventData.data.global.y);
+      displacementSpriteLook.position.set(eventData.data.global.x , eventData.data.global.y);
   }  
 
 
