@@ -18,6 +18,9 @@ bigPattern.x = -config.sqSize / 4;
 bigPattern.y = -config.sqSize / 4;
 app.stage.addChild(bigPattern);
 
+const foreground = new PIXI.Container();
+app.stage.addChild(foreground);
+
 // const quads = makeQuads();
 // for (let i = 0; i < quads.length; i++) {
 //   quads[i].alpha = 0;
@@ -28,25 +31,28 @@ const pentagonJam = makePentagons();
 bigPattern.addChild(pentagonJam);
 
 const logo = initLogo();
-app.stage.addChild(logo);
+foreground.addChild(logo);
 // logo.mask = quads[0];
 
 
 // const tagline = theTag();
-// app.stage.addChild(tagline);
+// foreground.addChild(tagline);
 // tagline.mask = quads[1];
 
 const location = theLocation();
-app.stage.addChild(location);
+foreground.addChild(location);
 
 // location.mask = quads[2];
-// const halftone = initHalftone();
-// app.stage.addChild(halftone);
+const halftone = initHalftone();
+foreground.addChild(halftone);
 
-
+const halfMask = new PIXI.Graphics();
+halfMask.beginFill(0xF00F00);
+halfMask.drawRect(200,app.renderer.height - 240 ,200,100);
+halftone.mask = halfMask;
 
 const icons = theIcons();
-app.stage.addChild(icons);
+foreground.addChild(icons);
 
 function positionLayout(){
   logo.y = 100;
@@ -89,15 +95,11 @@ let displaceTex3 = PIXI.Texture.fromImage('img/disp/5.png');
 
 displacement({
   texture: displaceTex,
-  displacedElement: logo,
+  displacedElement: foreground,
   container: app.stage
 });
 
-displacement({
-  texture: displaceTex,
-  displacedElement: location,
-  container: app.stage
-});
+
 
 
 // TICKER

@@ -7,7 +7,7 @@ export default (config) => {
   let displacementSpriteLook = new PIXI.Sprite(config.texture);
   //config.container.addChild(displacementSpriteLook);
   
-  //displacementSprite.scale.set(0.2);
+  displacementSprite.scale.set(2);
   var displacementFilter = new PIXI.filters.DisplacementFilter(displacementSprite);
   
   config.container.addChild(displacementSprite);
