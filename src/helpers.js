@@ -29,7 +29,7 @@ const debounce = function(func){
     var timer;
     return function(event){
         if(timer) clearTimeout(timer);
-        timer = setTimeout(func,100,event);
+        timer = setTimeout(func,20,event);
     };
 }
 
@@ -37,5 +37,44 @@ const map = function (the_numb, in_min, in_max, out_min, out_max) {
     return (the_numb - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
   }
 
-  
-export {shuffleArray, getWindowSize, debounce, map};
+
+const boxRatio = function(w,h) {
+    return w / h;
+}
+
+
+const backgroundSize = function(containerW, containerH, imgW, imgH, contain) {
+    let newDims = {
+        w: null,
+        h: null,
+        scale: null
+    };
+    const imgRatio = imgW / imgH;
+
+    if (containerW / imgRatio < containerH) {
+        // Image is 100% wide and shorter than container
+        // new dims must be contaier heigh
+        if (contain) {
+            newDims.h = containerW * imgRatio;
+            newDims.w = containerW;
+        } else {
+            newDims.h = containerH;
+            newDims.w = containerH * imgRatio;
+        }
+    } else {
+        // Image is 100% wide and taller than container
+        if (contain) {
+            newDims.w = containerH * imgRatio;
+            newDims.h = containerH;            
+        } else {        
+            newDims.w = containerW;
+            newDims.h = containerW / imgRatio;
+        }
+    }
+    newDims.scale = newDims.w / imgW;
+    return newDims;    
+}
+
+
+
+export {shuffleArray, getWindowSize, debounce, map, backgroundSize, boxRatio};

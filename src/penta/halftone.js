@@ -4,12 +4,13 @@ import {getWindowSize} from './../helpers.js';
 
 const initHalftone = function(){
   const halfTone = new PIXI.Container();
-  const htSize = 10;
+  const htSize = 16;
 
   const halfToneSprite = new PIXI.Sprite();
   const dot = new PIXI.Graphics();
   dot.beginFill(0x000000);
-  dot.drawCircle(0,0,((htSize/2) * 0.99));
+  const sSize = (htSize) * 0.79;
+  dot.drawRect(0,0, sSize, sSize);
   dot.endFill();
 
   const tex = app.renderer.generateTexture(dot);
@@ -30,18 +31,22 @@ const initHalftone = function(){
         sprite.x = htSize * i_x;
         sprite.y = htSize * i_y;
         sprite.alpha = 1.2;
-        
+        sprite.hitArea = new PIXI.Rectangle(0, 0, htSize, htSize);
         sprite.anchor.set(0.5);
 
         sprite.interactive = true;
+        sprite.buttonMode = true;
         sprite.on('mouseover', onMouseover);
         sprite.on('touchenter', onMouseover);
-
+        sprite.mouseover = function(){
+          console.log('fuck it');
+        };
         function onMouseover () {
+          console.log('mouse over');
           // TweenMax.to(shapeBox.scale, .3, {x: 1.32,y : 1.32, onComplete: function(){
           //     TweenMax.to(shapeBox.scale, .5, {x: 1,y : 1, delay: 1.3});
           // }});
-          const newScale = sprite.scale.x * 0.9;
+          const newScale = sprite.scale.x * 0.84;
           sprite.scale.set(newScale);
         }
 
@@ -56,9 +61,6 @@ const initHalftone = function(){
 
   
   halfTone.addChild(halfToneSprite);
-
-
-
 
 
 

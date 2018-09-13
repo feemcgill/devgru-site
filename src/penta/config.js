@@ -8,9 +8,6 @@ const config = {
       green: 0x427D3B,
       blue: 0x2F3A75,
       yellow: 0xD8B72D
-  },
-  test: {
-    testShape: true
   }
 };
 

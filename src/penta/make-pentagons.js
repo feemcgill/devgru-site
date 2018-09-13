@@ -14,33 +14,15 @@ const colorArray = [
 ]
 
 const makePentagon = function(color) {
-  const ss = config.sqSize;
+  let ss = config.sqSize;
   const shapeBox = new PIXI.Sprite(); 
-
-
-  shapeBox.interactive = true;
-  shapeBox.on('mouseover', onMouseover);
-  shapeBox.on('touchenter', onMouseover);
-  
-  shapeBox.hitArea = new PIXI.Rectangle(0, 0, config.sqSize, config.sqSize);
-
-
-  function onMouseover () {
-      TweenMax.to(shapeBox.scale, .3, {x: 1.32,y : 1.32, onComplete: function(){
-          TweenMax.to(shapeBox.scale, .5, {x: 1,y : 1, delay: 1.3});
-      }});
-  }
-  if (config.testShape) {
-      const bg = new PIXI.Graphics();
-      bg.beginFill(0x9cffd0, 1);
-      bg.drawRect(0, 0, config.sqSize, config.sqSize);        
-      bg.endFill();
-      bg.alpha = 0.1;
-      shapeBox.addChild(bg);
-  }
-
   const diamond = new PIXI.Graphics();
   shapeBox.addChild(diamond);
+
+  const size = getWindowSize();
+  if (size.width < 1000) {
+      ss = ss / 2; 
+  }
 
   diamond.lineStyle(config.sqThick, 0x000000, 1, 0);
   diamond.alpha = 1;
@@ -80,27 +62,31 @@ const makePentagons = function(){
   const container = new PIXI.Container();
   const shapes = new PIXI.Sprite();
   const pentagons = [];
+  const diamondColumns = [];
   for (let a = 0; a <  config.sqAcross; a++) {
+      const diamondColumn = [];
       for (let i = 0; i < config.sqDown; i++) {
           const diamond = makePentagon(colorArray[i%colorArray.length]);
           shapes.addChild(diamond);
           pentagons.push(diamond);
+          diamondColumn.push(diamond);
           diamond.x = a * ((app.renderer.width + config.sqSize) / config.sqAcross);
           diamond.y = i * ((app.renderer.height + config.sqSize) / config.sqDown);
       }
+      diamondColumns.push(diamondColumns);
+   }
+   console.log(diamondColumns);
+ const col = [];
+  for (let i = 0; i < config.sqAcross; i++) {
+      const e = pentagons[i];
+      if (e.diamondColumn == 5) {
+          col.push(e);
+      }
   }
 
-//   const col = [];
-//   for (let i = 0; i < pentagons.length; i++) {
-//       const e = pentagons[i];
-//       if (i % 2) {
-//         col.push(e);
-//       }
-//   }
-
-//   setTimeout(() => {
-//     TweenMax.staggerTo(col, 1.2, {y: - 1000} );
-//   }, 2000);
+  setTimeout(() => {
+    TweenMax.staggerTo(diamondColumns, 1.2, {y: - 1000} );
+  }, 2000);
 
 
   container.addChild(shapes);
@@ -114,9 +100,6 @@ const makePentagons = function(){
      
     // RESIZE
     function reSizeIt() {
-        // Get new size
-        const size = getWindowSize();
-
     
         // Move pentagons
         var cnt = 0;
