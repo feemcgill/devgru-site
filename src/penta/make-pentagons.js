@@ -25,9 +25,9 @@ const makePentagon = function(color) {
 
   diamond.lineStyle(config.sqThick, 0x000000, 1, 0);
   diamond.alpha = 1;
-  //diamond.beginFill(0xffff00);
+  diamond.beginFill(0xffff00);
   diamond.drawRect(0,0,ss,ss);
-  //diamond.endFill();
+  diamond.endFill();
   diamond.alpha = 1;
   diamond.rotation = 0.785398;
 
