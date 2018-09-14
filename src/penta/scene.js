@@ -38,12 +38,11 @@ halftone.interactive = true;
 const halfMask = new PIXI.Graphics();
 
 function sizePositionLayout(size){
-  console.log(size, 'ss');
   halfMask.clear();
   halfMask.beginFill(0xF00F00);
   bigPattern.x = -config.sqSize / 4;
   bigPattern.y = -config.sqSize / 4;
-  if (size.width > 1000) {
+  if (size.width > config.breaks.mobile) {
     logo.scale.set(1);
     logo.y = 100;
     logo.x = 100;
@@ -53,7 +52,7 @@ function sizePositionLayout(size){
     icons.scale.set(1);
     icons.x = app.renderer.width - 300;
     icons.y = app.renderer.height - 300;
-    halfMask.drawRect(200,app.renderer.height - 380 ,200,300);
+    halfMask.drawRect(200,app.renderer.height - 240 ,200,100);
   } else {
     logo.scale.set(0.3);
     logo.y = 70;
@@ -62,12 +61,12 @@ function sizePositionLayout(size){
     location.x = 50;
     location.y = 190;
     icons.scale.set(0.5);
-    icons.x = app.renderer.width - 150;
+    icons.x = 10;
     icons.y = app.renderer.height - 150;
     if (size.height < 450) {
       halfMask.drawRect(app.renderer.width - 250, 50 ,200,100);
     } else {
-      halfMask.drawRect(50,300 ,200,100);
+      halfMask.drawRect(app.renderer.width - 190 ,300, 150, 70);
     }
   }
   halftone.mask = halfMask;

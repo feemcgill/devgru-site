@@ -1,10 +1,15 @@
 import app from './app.js';
+import config from './config.js';
 import {debounce, getWindowSize} from './../helpers.js';
 
 
 const initBorder = function(){
-  const bt = 30; // border thickness
+  let bt = 30; // border thickness
   const border = new PIXI.Sprite();
+
+  if (config.initialSize.width < config.breaks.mobile) {
+    bt = 15;
+  }
 
 
 

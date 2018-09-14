@@ -2,7 +2,6 @@
 import app from './app.js';
 import {debounce, getWindowSize, map} from './../helpers.js';
 
-console.log('ICONS');
 const initIcons = function(){
   const theIcon = new PIXI.Sprite();
 

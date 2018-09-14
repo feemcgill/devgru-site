@@ -38,16 +38,13 @@ const initHalftone = function(){
         sprite.buttonMode = true;
         sprite.on('mouseover', onMouseover);
         sprite.on('touchenter', onMouseover);
-        sprite.mouseover = function(){
-          console.log('fuck it');
-        };
+
         function onMouseover () {
-          console.log('mouse over');
-          // TweenMax.to(shapeBox.scale, .3, {x: 1.32,y : 1.32, onComplete: function(){
-          //     TweenMax.to(shapeBox.scale, .5, {x: 1,y : 1, delay: 1.3});
-          // }});
-          const newScale = sprite.scale.x * 0.84;
-          sprite.scale.set(newScale);
+          const newScale = sprite.scale.x * 0.7;
+          TweenMax.to(sprite.scale, .3, {x: newScale ,y : newScale, onComplete: function(){
+              TweenMax.to(sprite.scale, .1, {x: 1,y : 1, delay: 5});
+          }});
+          // sprite.scale.set(newScale);
         }
 
         halfToneSprite.addChild(sprite);

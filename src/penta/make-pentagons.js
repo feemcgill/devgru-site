@@ -19,8 +19,7 @@ const makePentagon = function(color) {
   const diamond = new PIXI.Graphics();
   shapeBox.addChild(diamond);
 
-  const size = getWindowSize();
-  if (size.width < 1000) {
+  if (config.initialSize.width < config.breaks.mobile) {
       ss = ss / 2; 
   }
 
@@ -133,7 +132,9 @@ const makePentagons = function(){
 
     shapes.filters = [displacementFilter];
 
-    displacementSprite.scale.set(5);
+
+
+    displacementSprite.scale.set(displacementSpriteMax);
     displacementFilter.scale.set(50);
     displacementSprite.anchor.set(0.5);
     displacementSprite.x = app.renderer.width / 2;
@@ -141,7 +142,19 @@ const makePentagons = function(){
 
     displacementSprite_LOOK.anchor.set(0.5);
 
-    TweenMax.to(displacementSprite.scale, 15, {x: 3, y: 3, repeat: -1, yoyo: true, ease: Back.easeOut} );
+
+
+    const size = getWindowSize();
+    let displacementSpriteMax = 5;
+    let displacementSpriteMin = 3;
+    if (config.initialSize.width < config.breaks.mobile) {
+        displacementSpriteMax = 3;
+        displacementSpriteMin = 1;
+        displacementFilter.scale.set(10);
+    }
+
+    
+    TweenMax.to(displacementSprite.scale, 15, {x: displacementSpriteMin, y: displacementSpriteMin, repeat: -1, yoyo: true, ease: Back.easeOut} );
     container.interactive = true;
     
     container

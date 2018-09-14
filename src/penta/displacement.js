@@ -1,3 +1,4 @@
+import globalConfig from './config.js';
 
 
 export default (config) => {
@@ -20,9 +21,11 @@ export default (config) => {
   
   displacementSpriteLook.anchor.set(0.5);
   displacementSpriteLook.alpha = 0.4;
-  
+
+  if (globalConfig.initialSize.width < globalConfig.breaks.mobile) {
+    //displacementSprite.scale.set(1);
+  }
   config.container.interactive = true;
-  
   config.container
       .on('mousemove', onPointerMove)
       .on('touchmove', onPointerMove);

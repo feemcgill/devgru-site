@@ -1,3 +1,5 @@
+import {getWindowSize} from './../helpers.js';
+
 const config = {
   sqSize: 25,
   sqThick: 1,
@@ -8,7 +10,12 @@ const config = {
       green: 0x427D3B,
       blue: 0x2F3A75,
       yellow: 0xD8B72D
-  }
+  },
+  breaks: {
+    mobile: 1000,
+  },
+  initialSize: getWindowSize()
+
 };
 
 export default config;
