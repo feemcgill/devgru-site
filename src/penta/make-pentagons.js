@@ -25,13 +25,7 @@ const makePentagon = function(color) {
 
   diamond.lineStyle(config.sqThick, 0x000000, 1, 0);
   diamond.alpha = 1;
-  //diamond.beginFill(0xffffff);
-//   diamond.moveTo(ss/2, 0);
-//   diamond.lineTo(ss, ss/3);
-//   diamond.lineTo(ss - (ss * 0.2) , ss - (ss * 0.05));
-//   diamond.lineTo((ss * 0.2) , ss - (ss * 0.05));
-//   diamond.lineTo(0, ss/3);
-//   diamond.lineTo(ss/2, 0);
+  //diamond.beginFill(0xffff00);
   diamond.drawRect(0,0,ss,ss);
   //diamond.endFill();
   diamond.alpha = 1;
@@ -135,7 +129,7 @@ const makePentagons = function(){
 
 
     displacementSprite.scale.set(displacementSpriteMax);
-    displacementFilter.scale.set(50);
+    //displacementFilter.scale.set(50);
     displacementSprite.anchor.set(0.5);
     displacementSprite.x = app.renderer.width / 2;
     displacementSprite.y = app.renderer.height / 2;

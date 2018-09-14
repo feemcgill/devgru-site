@@ -72,14 +72,10 @@ function sizePositionLayout(size){
   halftone.mask = halfMask;
 }
 
-const size = getWindowSize();
-sizePositionLayout(size);
-
+sizePositionLayout(config.initialSize);
 
 const border = initBorder();
 app.stage.addChild(border);
-
-
 
 // displace
 let displaceTex = PIXI.Texture.fromImage('img/disp/9.png');
