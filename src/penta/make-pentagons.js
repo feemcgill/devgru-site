@@ -15,15 +15,17 @@ const colorArray = [
 
 const makePentagon = function(color) {
   let ss = config.sqSize;
+  let lineThick = config.sqThick;
   const shapeBox = new PIXI.Sprite(); 
   const diamond = new PIXI.Graphics();
   shapeBox.addChild(diamond);
 
   if (config.initialSize.width < config.breaks.mobile) {
-      ss = ss / 2; 
+      ss = ss / 2;
+      lineThick = 0;
   }
 
-  diamond.lineStyle(config.sqThick, 0x000000, 1, 0);
+  diamond.lineStyle(lineThick, 0x000000, 1, 0);
   diamond.alpha = 1;
   diamond.beginFill(0xffff00);
   diamond.drawRect(0,0,ss,ss);
