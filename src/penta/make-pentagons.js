@@ -17,35 +17,29 @@ const makePentagon = function(color) {
   let ss = config.sqSize;
   let lineThick = config.sqThick;
   const shapeBox = new PIXI.Sprite(); 
-  const diamond = new PIXI.Graphics();
-  shapeBox.addChild(diamond);
+  shapeBox.width = 1;
+  shapeBox.height = 1;
+  shapeBox.pivot.x = config.sqSize / 2;
+  shapeBox.pivot.y = config.sqSize / 2;   
 
   if (config.initialSize.width < config.breaks.mobile) {
       ss = ss / 2;
       lineThick = 0;
   }
 
+  const diamond = new PIXI.Graphics();
   diamond.lineStyle(lineThick, 0x000000, 1, 0);
   diamond.alpha = 1;
-  diamond.beginFill(0xffff00);
+  diamond.beginFill(0x000000);
   diamond.drawRect(0,0,ss,ss);
   diamond.endFill();
   diamond.alpha = 1;
   diamond.rotation = 0.785398;
-
-
-  // diamond.pivot.x = config.sqSize / 2;
-  // diamond.pivot.y = config.sqSize / 2;
   diamond.x = config.sqSize / 2;
   diamond.y = config.sqSize / 2;
+  shapeBox.alpha = 0.5;
+  shapeBox.addChild(diamond);
 
-
-
-  shapeBox.width = 1;
-  shapeBox.height = 1;
-  //shapeBox.anchor.set(0.5);
-  shapeBox.pivot.x = config.sqSize / 2;
-  shapeBox.pivot.y = config.sqSize / 2;        
   return shapeBox;              
 }
 
@@ -70,8 +64,8 @@ const makePentagons = function(){
       }
       diamondColumns.push(diamondColumns);
    }
-   console.log(diamondColumns);
- const col = [];
+
+   const col = [];
   for (let i = 0; i < config.sqAcross; i++) {
       const e = pentagons[i];
       if (e.diamondColumn == 5) {
@@ -111,9 +105,9 @@ const makePentagons = function(){
     }
     
     
-    window.addEventListener("resize",debounce(function(e){
+    window.addEventListener("resize",function(e){
         reSizeIt();
-    }));
+    });
     container.interactive = true;
 
 
@@ -131,7 +125,7 @@ const makePentagons = function(){
 
 
     displacementSprite.scale.set(displacementSpriteMax);
-    //displacementFilter.scale.set(50);
+    displacementFilter.scale.set(50);
     displacementSprite.anchor.set(0.5);
     displacementSprite.x = app.renderer.width / 2;
     displacementSprite.y = app.renderer.height / 2;
@@ -140,7 +134,6 @@ const makePentagons = function(){
 
 
 
-    const size = getWindowSize();
     let displacementSpriteMax = 5;
     let displacementSpriteMin = 3;
     if (config.initialSize.width < config.breaks.mobile) {

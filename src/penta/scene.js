@@ -17,10 +17,12 @@ const bigPattern = new PIXI.Sprite();
 app.stage.addChild(bigPattern);
 
 const foreground = new PIXI.Container();
-app.stage.addChild(foreground);
+//app.stage.addChild(foreground);
 
 const pentagonJam = makePentagons();
 bigPattern.addChild(pentagonJam);
+
+
 
 const logo = initLogo();
 foreground.addChild(logo);
@@ -30,6 +32,11 @@ foreground.addChild(location);
 
 const icons = theIcons();
 foreground.addChild(icons);
+
+const tagSprite = new PIXI.Sprite.fromImage('img/creative-tech.png');
+//const tagger = theTag();
+//foreground.addChild(tagSprite);
+
 
 const halftone = initHalftone();
 foreground.addChild(halftone);
@@ -75,10 +82,19 @@ function sizePositionLayout(size){
 sizePositionLayout(config.initialSize);
 
 const border = initBorder();
-app.stage.addChild(border);
+//app.stage.addChild(border);
 
 // displace
-let displaceTex = PIXI.Texture.fromImage('img/disp/9.png');
+let pcTex = PIXI.Texture.fromImage('img/pc/pc1.jpg');
+const pcSprite = new PIXI.Sprite(pcTex);
+pcSprite.width = app.renderer.width;
+pcSprite.height = app.renderer.height;
+pcSprite.blendMode = PIXI.BLEND_MODES.ADD;
+//app.stage.addChild(pcSprite);
+
+
+
+let displaceTex = PIXI.Texture.fromImage('img/disp/7.png');
 
 displacement({
   texture: displaceTex,

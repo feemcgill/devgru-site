@@ -15,8 +15,8 @@ export default (config) => {
   
   config.displacedElement.filters = [displacementFilter];
   
-//   displacementFilter.scale.x = 1;
-//   displacementFilter.scale.y = 1;
+  displacementFilter.scale.x = 50;
+  displacementFilter.scale.y = 50;
   displacementSprite.anchor.set(0.5);
   
   displacementSpriteLook.anchor.set(0.5);

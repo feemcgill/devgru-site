@@ -2,7 +2,7 @@ import {getWindowSize} from './../helpers.js';
 
 const config = {
   sqSize: 25,
-  sqThick: 1,
+  sqThick: 3,
   sqAcross: 16,
   sqDown: 16,
   colors: {

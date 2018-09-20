@@ -17,7 +17,7 @@ const tagLine = function(){
 
   tagSprite.x = 70;
   //tagSprite.y = app.renderer.height - 300;
-  tagSprite.y = app.renderer.height - 300;
+  //tagSprite.y = app.renderer.height - 300;
   theTag.addChild(tagSprite);
 
   tagSprite.scale.set(0.01);
@@ -33,9 +33,9 @@ const tagLine = function(){
     }})
   }
 
-  setTimeout(() => {
-    scaleIt();
-  }, 10000);
+  // setTimeout(() => {
+  //   scaleIt();
+  // }, 10000);
 
   // RESIZE
   function reSizeIt() {
