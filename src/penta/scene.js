@@ -17,7 +17,7 @@ const bigPattern = new PIXI.Sprite();
 app.stage.addChild(bigPattern);
 
 const foreground = new PIXI.Container();
-//app.stage.addChild(foreground);
+app.stage.addChild(foreground);
 
 const pentagonJam = makePentagons();
 bigPattern.addChild(pentagonJam);
@@ -82,7 +82,7 @@ function sizePositionLayout(size){
 sizePositionLayout(config.initialSize);
 
 const border = initBorder();
-//app.stage.addChild(border);
+app.stage.addChild(border);
 
 // displace
 let pcTex = PIXI.Texture.fromImage('img/pc/pc1.jpg');
@@ -90,7 +90,7 @@ const pcSprite = new PIXI.Sprite(pcTex);
 pcSprite.width = app.renderer.width;
 pcSprite.height = app.renderer.height;
 pcSprite.blendMode = PIXI.BLEND_MODES.ADD;
-//app.stage.addChild(pcSprite);
+app.stage.addChild(pcSprite);
 
 
 
