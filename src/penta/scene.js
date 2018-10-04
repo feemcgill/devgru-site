@@ -20,15 +20,13 @@ const foreground = new PIXI.Container();
 app.stage.addChild(foreground);
 
 const pentagonJam = makePentagons();
-bigPattern.addChild(pentagonJam);
-
-
+//bigPattern.addChild(pentagonJam);
 
 const logo = initLogo();
 foreground.addChild(logo);
 
 const location = theLocation();
-foreground.addChild(location);
+//foreground.addChild(location);
 
 const icons = theIcons();
 foreground.addChild(icons);
@@ -87,6 +85,7 @@ app.stage.addChild(border);
 // displace
 let pcTex = PIXI.Texture.fromImage('img/pc/pc1.jpg');
 const pcSprite = new PIXI.Sprite(pcTex);
+pcSprite.alpha = 0.8;
 pcSprite.width = app.renderer.width;
 pcSprite.height = app.renderer.height;
 pcSprite.blendMode = PIXI.BLEND_MODES.ADD;
