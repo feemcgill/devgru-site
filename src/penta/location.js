@@ -9,7 +9,7 @@ const theLocation = function(){
 
 
   const locationSprite = new PIXI.Sprite.fromImage('img/los-angeles.png');
-  locationSprite.tint = 0x000000;
+  locationSprite.tint = 0xff0000;
   locationSprite.scale.x = 0.4;
   locationSprite.scale.y = 0.4;
   locationSprite.rotation = 0.06;

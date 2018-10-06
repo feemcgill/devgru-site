@@ -1,10 +1,14 @@
 
 #mc_embed_signup input.mce_inline_error 
-  border-color: red!important
+  border-color: yellow!important
+  //border: none
+  //border-bottom: 3px solid red!important
+
+  //background: yellow
 #mc_embed_signup div.mce_inline_error
-  margin: -20px 0 20px 0!important
-  padding: 5px 10px
-  background-color: red!important
+  margin: -1.2vw 0 1.2vw 0!important
+  background-color: yellow!important
+  color: red!important
   display: block
   font-size: 0.7em
 #mc_embed_signup .asterisk
@@ -14,15 +18,40 @@ input
   &[type="email"]
     background: none
     border: none
-    border-bottom: 2px solid $fg
+    border: 3px solid yellow
     width: 100%
-    margin-bottom: 20px
+    margin-bottom: 1.2vw
+    padding: .35vw
+    font-size: 1.3vw
+    font-family: "futura-pt"
+    color: yellow
+    +small
+      font-size: 20px
+
 input[type="submit"]
   font-family: "futura-pt"
-  background: $fg
+  background: blue
   border: none
-  color: $bg
-  font-size: 20px
-  border-radius: 15px
-  padding: 2px 30px
-  width: 100%
+  color: yellow
+  border: 3px solid yellow
+  padding: 10px
+  font-size: 15px
+  cursor: pointer  
+.indicates-required
+  font-size: 0.7em
+  margin-top: 2em
+  text-align: left
+#mce-error-response
+  margin-bottom: 20px
+  padding: 5px
+  background: red
+#mce-success-response
+  position: absolute
+  top: 0
+  left: 0
+  bottom: 0
+  right: 0
+  background: yellow
+  color: blue
+  padding: 20px
+  font-size: 30px

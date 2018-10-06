@@ -14,26 +14,26 @@ import makeQuads from './quads.js';
 import theGame from './game.js';
 
 const bigPattern = new PIXI.Sprite();
-app.stage.addChild(bigPattern);
+bigPattern.alpha = 0.2;
+//app.stage.addChild(bigPattern);
 
 const foreground = new PIXI.Container();
 app.stage.addChild(foreground);
 
 const pentagonJam = makePentagons();
-//bigPattern.addChild(pentagonJam);
+bigPattern.addChild(pentagonJam);
 
 const logo = initLogo();
 foreground.addChild(logo);
 
 const location = theLocation();
-//foreground.addChild(location);
+foreground.addChild(location);
 
 const icons = theIcons();
 foreground.addChild(icons);
 
-const tagSprite = new PIXI.Sprite.fromImage('img/creative-tech.png');
-//const tagger = theTag();
-//foreground.addChild(tagSprite);
+// const tagSprite = new PIXI.Sprite.fromImage('img/creative-tech.png');
+// foreground.addChild(tagSprite);
 
 
 const halftone = initHalftone();
@@ -41,6 +41,7 @@ foreground.addChild(halftone);
 halftone.interactive = true;
 
 const halfMask = new PIXI.Graphics();
+
 
 function sizePositionLayout(size){
   halfMask.clear();
@@ -59,7 +60,10 @@ function sizePositionLayout(size){
     icons.y = app.renderer.height - 300;
     halfMask.drawRect(200,app.renderer.height - 240 ,200,100);
   } else {
-    logo.scale.set(0.3);
+    // logo.scale.set(0.3);
+    TweenMax.to(logo.scale, .2,{x:0.3, y:0.3,
+      ease: Back.easeOut.config(1.7)
+    });    
     logo.y = 70;
     logo.x = 50;
     location.scale.set(0.5);
@@ -74,26 +78,58 @@ function sizePositionLayout(size){
       halfMask.drawRect(app.renderer.width - 190 ,300, 150, 70);
     }
   }
+  console.log(location.scale)
   halftone.mask = halfMask;
 }
 
 sizePositionLayout(config.initialSize);
 
+
+const foregroundItems = [
+  logo, location, icons, halfMask
+];
+
+foregroundItems.forEach(el => {
+  TweenMax.to(el.scale,0.001,{x:0, y:10});
+});
+
+//TweenMax.set(halftone.scale, {x: 0, y:0});
+function animateSceneIntro() {
+  let i = 0;
+  foregroundItems.forEach(el => {
+    setTimeout(() => {
+      TweenMax.to(el.scale, .5,{x:1, y:1,
+        ease: Back.easeOut.config(1.7),
+        onComplete: function(){
+        }
+      });
+    },100 * i)
+    i++;
+  });
+}
+setTimeout(() => {
+  animateSceneIntro();  
+}, 1000);
+
+
+
+
 const border = initBorder();
-app.stage.addChild(border);
+app.stage.addChild(border.border);
+
+//app.stage.addChild(border.mask);
 
 // displace
-let pcTex = PIXI.Texture.fromImage('img/pc/pc1.jpg');
-const pcSprite = new PIXI.Sprite(pcTex);
-pcSprite.alpha = 0.8;
-pcSprite.width = app.renderer.width;
-pcSprite.height = app.renderer.height;
-pcSprite.blendMode = PIXI.BLEND_MODES.ADD;
-app.stage.addChild(pcSprite);
+// let pcTex = PIXI.Texture.fromImage('img/pc/pc1b.jpg');
+// const pcSprite = new PIXI.Sprite(pcTex);
+// pcSprite.alpha = 1;
+// pcSprite.width = app.renderer.width;
+// pcSprite.height = app.renderer.height;
+// pcSprite.blendMode = PIXI.BLEND_MODES.ADD;
 
 
 
-let displaceTex = PIXI.Texture.fromImage('img/disp/7.png');
+let displaceTex = PIXI.Texture.fromImage('img/disp/14.png');
 
 displacement({
   texture: displaceTex,
@@ -122,7 +158,8 @@ function reSizeIt() {
 	app.renderer.view.style.height = h + "px";      
   app.renderer.resize(w,h);
   sizePositionLayout(size);
-  
+  pcSprite.width = app.renderer.width;
+  pcSprite.height = app.renderer.height;  
 }
 
 

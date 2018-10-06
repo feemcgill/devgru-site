@@ -14,7 +14,7 @@ const initLogo = function(){
   theLogo.addChild(logoBg);
 
   const logoImg = new PIXI.Sprite.fromImage('img/devgru-logo-type-g-stack.png');
-  logoImg.tint = 0x000000;
+  logoImg.tint = 0xff0000;
   logoImg.scale.x = 0.5;
   logoImg.scale.y = 0.5;
   logoImg.rotation = -0.03;
