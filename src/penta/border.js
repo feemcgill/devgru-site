@@ -10,7 +10,7 @@ const initBorder = function(){
   border.mask = new PIXI.Graphics();
 
   if (config.initialSize.width < config.breaks.mobile) {
-    bt = 15;
+    bt = 30;
   }
 
 
