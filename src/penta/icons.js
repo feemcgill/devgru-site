@@ -12,7 +12,7 @@ const initIcons = function(){
   
   const iconImg = new PIXI.Sprite.fromImage('img/icon-sprite-white.png');
   theIcon.addChild(iconImg);
-  iconImg.tint = 0x000000;
+  iconImg.tint = 0xff0000;
   // iconImg.scale.x = 0.5;
   // iconImg.scale.y = 0.5;
 

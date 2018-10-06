@@ -8,7 +8,7 @@ const initHalftone = function(){
 
   const halfToneSprite = new PIXI.Sprite();
   const dot = new PIXI.Graphics();
-  dot.beginFill(0x000000);
+  dot.beginFill(0xff0000);
   const sSize = (htSize) * 0.79;
   dot.drawRect(0,0, sSize, sSize);
   dot.endFill();

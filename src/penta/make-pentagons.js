@@ -28,9 +28,9 @@ const makePentagon = function(color) {
   }
 
   const diamond = new PIXI.Graphics();
-  diamond.lineStyle(lineThick, 0x000000, 1, 0);
+  diamond.lineStyle(lineThick, 0xff0000, 1, 0);
   diamond.alpha = 1;
-  diamond.beginFill(0x000000);
+  diamond.beginFill(0xff0000);
   diamond.drawRect(0,0,ss,ss);
   diamond.endFill();
   diamond.alpha = 1;

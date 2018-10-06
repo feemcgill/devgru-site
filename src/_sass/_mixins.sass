@@ -1,11 +1,15 @@
 $break: 1000px
-
+$small: 750px
 =break
   @media (max-width: #{$break})
     @content
 
 =breakup
   @media (min-width: #{$break})
+    @content
+
+=small
+  @media (max-width: #{$small})
     @content
 
 =full-bg
