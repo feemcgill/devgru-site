@@ -18,7 +18,7 @@ const elements = [
 function infoScreenOut() {
   const windowSize = getWindowSize();
   const offset = windowSize.height+500;
-  TweenMax.to(info_screen, 1.6, {opacity: 0,
+  TweenMax.to(info_screen, .6, {opacity: 0,
     onComplete: function(){
       info_screen.style.display = 'none';
     }

@@ -61,11 +61,13 @@ body
     z-index: 1000
     width: 40px
     height: 40px
+  .info-wrap
+    display: flex
+    margin: 100px 50px 0
 
   #about_devgru
-    width: 62vw
-    padding: 10vw 5vw
-    box-sizing: border-box
+    width: 50vw
+    // padding: 10vw 5vw
     // transform: translateY(0)
     // transition: all .2s ease-out
     p
@@ -79,15 +81,50 @@ body
       padding: 50px 35px
       p
         font-size: 20px
+  #devgru_links
+    width: 20vw
+    // background: navy
+    display: flex
+    //justify-content: center
+    flex-wrap: wrap
+    align-items: center
+    padding: 2vw    
+    .devgru-linker
+      position: relative
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 100%
+      text-align: center
+      color: yellow
+      text-decoration: none
+      text-transform: uppercase
+      letter-spacing: 0.2em
+      padding: 10px
+      line-height: 1.1
+      font-size: 1.2vw
+      &:hover
+        color: blue
+        svg
+          polygon
+            fill: yellow
+      span
+        display: block
+        text-align: center
+        position: relative
+        z-index: 100
+
+      //width: 80%
+      svg
+        width: 100%
+        position: absolute
+        polygon
+          fill: transparent
+          stroke: yellow
+          stroke-width: 2px
+
   #devgru_form
-    width: 35vw
-    padding: 10vw 5vw
-    box-sizing: border-box
-    // transform: translateY(0)
-    // transition: all .2s ease-out
-    position: absolute
-    top: 0
-    right: 0
+    width: 30vw
     #mc_embed_signup
       font-size: 1.2vw
     +break
