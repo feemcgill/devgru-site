@@ -8,7 +8,13 @@ const info_screen = document.getElementById("info_screen");
 const devgru_form = document.getElementById("devgru_form");
 const about_devgru = document.getElementById("about_devgru");
 
-
+const elements = [
+  button_know,
+  button_info_screen_close,
+  info_screen,
+  devgru_form,
+  about_devgru
+]
 function infoScreenOut() {
   const windowSize = getWindowSize();
   const offset = windowSize.height+500;
@@ -49,3 +55,6 @@ button_info_screen_close.addEventListener('click', function(e) {
   e.preventDefault();
   infoScreenOut();
 }, false);
+
+
+export {elements};

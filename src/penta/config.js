@@ -12,7 +12,7 @@ const config = {
       yellow: 0xD8B72D
   },
   breaks: {
-    mobile: 1000,
+    mobile: 800,
   },
   initialSize: getWindowSize()
 
