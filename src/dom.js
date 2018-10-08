@@ -7,6 +7,7 @@ const button_info_screen_close = document.getElementById("button_info_screen_clo
 const info_screen = document.getElementById("info_screen");
 const devgru_form = document.getElementById("devgru_form");
 const about_devgru = document.getElementById("about_devgru");
+const linker_buttons = document.getElementsByClassName("devgru-linker");
 
 const elements = [
   button_know,
@@ -33,6 +34,8 @@ function infoScreenOut() {
       TweenMax.set(about_devgru,{y: offset});
     }
   });
+  TweenMax.staggerTo(linker_buttons, 0.3, {opacity: 0, scale: 0.2});
+
 }
 infoScreenOut();
 
@@ -42,6 +45,7 @@ function infoScreenIn(){
   TweenMax.to(devgru_form, 0.6, {y: 0 });
   TweenMax.to(about_devgru, 0.6, {y: 0 });
   TweenMax.to(button_info_screen_close, 0.6, {x: 0, delay: 0.1 });
+  TweenMax.staggerTo(linker_buttons, 0.3, {opacity: 1, scale: 1, delay: 0.4});
 
 
 }
