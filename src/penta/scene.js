@@ -13,6 +13,7 @@ import theIcons from './icons.js';
 import makeQuads from './quads.js';
 import theGame from './game.js';
 import Bfilter from './filt.js';
+import {map} from './../helpers.js';
 
 const bigPattern = new PIXI.Sprite();
 bigPattern.alpha = 0.2;
@@ -43,9 +44,29 @@ const halfMask = new PIXI.Graphics();
 
 
 
-// var theFilter = new Bfilter();
+var theFilter = new Bfilter();
 
-// app.stage.filters = [theFilter];
+app.stage.filters = [theFilter];
+
+
+
+app.stage.interactive = true;
+app.stage
+  .on('mousemove', onPointerMove)
+  .on('touchmove', onPointerMove)
+
+
+
+
+function onPointerMove(eventData) {
+  var mx = eventData.data.global.x;
+  var my = eventData.data.global.y;
+
+  var moverX = map(my, 0, app.renderer.height, 0, 500);
+
+  theFilter.size = moverX;
+  
+} 
 
 
 // Border
