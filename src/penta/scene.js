@@ -12,6 +12,7 @@ import theLocation from './location.js';
 import theIcons from './icons.js';
 import makeQuads from './quads.js';
 import theGame from './game.js';
+import Bfilter from './filt.js';
 
 const bigPattern = new PIXI.Sprite();
 bigPattern.alpha = 0.2;
@@ -41,11 +42,16 @@ halftone.interactive = true;
 const halfMask = new PIXI.Graphics();
 
 
+
+// var theFilter = new Bfilter();
+
+// app.stage.filters = [theFilter];
+
+
 // Border
 const border = initBorder();
 app.stage.addChild(border.border);
 
-// Displacement
 let displaceTex = PIXI.Texture.fromImage('img/disp/14.png');
 displacement({
   texture: displaceTex,
