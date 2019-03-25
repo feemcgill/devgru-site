@@ -44,9 +44,9 @@ const halfMask = new PIXI.Graphics();
 
 
 
-var theFilter = new Bfilter();
+// var theFilter = new Bfilter();
 
-app.stage.filters = [theFilter];
+// app.stage.filters = [theFilter];
 
 
 
@@ -57,14 +57,21 @@ app.stage
 
 
 
-
 function onPointerMove(eventData) {
   var mx = eventData.data.global.x;
   var my = eventData.data.global.y;
 
-  var moverX = map(my, 0, app.renderer.height, 0, 500);
+  var moverX;
 
-  theFilter.size = moverX;
+  if (my < app.renderer.height / 2) {
+    moverX = map(my, 0, app.renderer.height, 0, 500);
+  } else {
+
+    moverX = map(my, 0, app.renderer.height, 500, 0);
+  }
+
+  // TweenMax.to(theFilter, 4, {size: moverX})
+
   
 } 
 
